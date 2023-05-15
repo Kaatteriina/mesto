@@ -1,0 +1,14 @@
+.element__like-button {
+    background-color: transparent;
+    color: #000000;
+    background-image: url(../../../images/like.svg);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    width: 22px;
+    height: 19px;
+    margin: 35px 0;
+    border: 0;
+  }
+  .element__like-button:hover {
+    background-image: url(images/blackheart.svg);
+  }

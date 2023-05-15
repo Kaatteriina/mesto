@@ -1,0 +1,21 @@
+.profile__edit-button {
+    align-self: center;
+    background-color: transparent;
+    background-image: url(../../../images/pensil.svg);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 41%;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    height: 24px;
+    width: 24px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+  }
+  
+  .profile__edit-button:hover {
+    opacity: 0.6;
+  }
+  
