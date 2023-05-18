@@ -20,3 +20,10 @@
       row-gap: 4px;
     }
   }
+  @media screen and (max-width: 567px){
+.profile__info {
+    column-gap: 10px;
+    grid-template-columns: 1fr 16px;
+    max-width: calc(100% - 28px);
+    row-gap: 4px;
+}}

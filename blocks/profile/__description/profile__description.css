@@ -10,3 +10,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+
+  @media screen and (max-width: 567px){
+    .profile__description{
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+    }}
+  

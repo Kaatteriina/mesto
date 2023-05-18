@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pages/index.css" />
-    <link rel="stylesheet" href="vendor/normalize.css" />
+    
 
     <title>Mesto</title>
   </head>
@@ -31,7 +31,7 @@
           <p class="profile__description">Исследователь океана</p>
         </div>
 
-        <button class="profile__add-button"></button>
+        <button class="profile__add-button" type="button"></button>
       </section>
 
       <section class="elements">
@@ -42,7 +42,7 @@
             alt="дорога с перекрестком"
           />
           <h2 class="element__title">Центр города</h2>
-          <button class="element__like-button"></button>
+          <button class="element__like-button element__like-button_active" type="button"></button>
         </article>
         <article class="element">
           <img
@@ -51,7 +51,7 @@
             alt="тории в киото"
           />
           <h2 class="element__title">Киото</h2>
-          <button class="element__like-button"></button>
+          <button class="element__like-button"type="button" ></button>
         </article>
         <article class="element">
           <img
@@ -60,7 +60,7 @@
             alt="девушка в лодке"
           />
           <h2 class="element__title">Девушка в лодке</h2>
-          <button class="element__like-button"></button>
+          <button class="element__like-button"type="button"></button>
         </article>
         <article class="element">
           <img
@@ -69,7 +69,7 @@
             alt="цветок сакуры"
           />
           <h2 class="element__title">Цветение Сакуры</h2>
-          <button class="element__like-button"></button>
+          <button class="element__like-button"type="button"></button>
         </article>
         <article class="element">
           <img
@@ -78,7 +78,7 @@
             alt="верхушка храма"
           />
           <h2 class="element__title">Крыша Храма</h2>
-          <button class="element__like-button"></button>
+          <button class="element__like-button"type="button"></button>
         </article>
         <article class="element">
           <img
@@ -87,7 +87,7 @@
             alt="горная порода"
           />
           <h2 class="element__title">Гора</h2>
-          <button class="element__like-button element__like-button_active"></button>
+          <button class="element__like-button element__like-button_active"type="button"></button>
         </article>
       </section>
     </main>
@@ -102,27 +102,30 @@
         <form class="popup__form" name="profile">
           <h2 class="popup__title">Редактировать профиль</h2>
           <fieldset class="popup__fieldset">
-            <label class="popup__label-field">
+            
               <input 
                 type="text"
-                class="popup__input popup__input_name"
+                class="popup__input popup__input_type_name"
                 id="name"
+                name="name"
                 placeholder="Имя" required/>
               <input
                 type="text"
-                class="popup__input popup__input_about"
+                class="popup__input popup__input_type_about"
                 id="about"
+                name="about"
                 placeholder="О себе" required
               />
-            </label>
-            <button class="popup__save-button">Сохранить</button>
+            
+            <button class="popup__save-button" type="submit">Сохранить</button>
           </fieldset>
         </form>
       </div>
     </div>
 
-    <script src="index.js" defer></script>
+   
   </div>
+  <script src="./script/index.js"></script>
   </body> 
 </html>
 
