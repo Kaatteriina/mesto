@@ -5,131 +5,145 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pages/index.css" />
-    
 
     <title>Mesto</title>
   </head>
   <body>
-  <div class="page"> 
-    <header class="header">
-      <div class="header__logo"></div>
-    </header>
+    <div class="page">
+      <header class="header">
+        <div class="header__logo"></div>
+      </header>
 
-    <main class="content">
-      <section class="profile">
-        <img
-          class="profile__avatar"
-          src="https://images.unsplash.com/photo-1682079470276-619657e2a48b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMzl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-          alt="аватарка профиля"
-        />
-
-        <div class="profile__info">
-          <h1 class="profile__name">Жак Ив Кусто</h1>
-          <button class="profile__edit-button" type="button">
-            Edit Button
-          </button>
-          <p class="profile__description">Исследователь океана</p>
-        </div>
-
-        <button class="profile__add-button" type="button"></button>
-      </section>
-
-      <section class="elements">
-        <article class="element">
+      <main class="content">
+        <section class="profile">
           <img
-            class="element__image"
-            src="https://images.unsplash.com/photo-1682421230186-4a0e2bb24028?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=900&q=60"
-            alt="дорога с перекрестком"
+            class="profile__avatar"
+            src="https://images.unsplash.com/photo-1682079470276-619657e2a48b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMzl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
+            alt="аватарка профиля"
           />
-          <h2 class="element__title">Центр города</h2>
-          <button class="element__like-button element__like-button_active" type="button"></button>
-        </article>
-        <article class="element">
-          <img
-            class="element__image"
-            src="https://images.unsplash.com/photo-1682282462523-996afa93708b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60"
-            alt="тории в киото"
-          />
-          <h2 class="element__title">Киото</h2>
-          <button class="element__like-button"type="button"></button
-        </article>
-        <article class="element">
-          <img
-            class="element__image"
-            src="https://images.unsplash.com/photo-1604537466158-719b1972feb8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwyOHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60"
-            alt="девушка в лодке"
-          />
-          <h2 class="element__title">Девушка в лодке</h2>
-          <button class="element__like-button" type="button"></button>
 
-        </article>
-        <article class="element">
-          <img
-            class="element__image"
-            src="https://images.unsplash.com/photo-1681842232867-bd0f2f149765?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1OXx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60"
-            alt="цветок сакуры"
-          />
-          <h2 class="element__title">Цветение Сакуры</h2>
-          <button class="element__like-button" type="button"></button>
+          <div class="profile__info">
+            <h1 class="profile__name">Жак Ив Кусто</h1>
+            <button class="profile__edit-button" type="button">
+              Edit Button
+            </button>
+            <p class="profile__description">Исследователь океана</p>
+          </div>
 
-        </article>
-        <article class="element">
-          <img
-            class="element__image"
-            src="https://images.unsplash.com/photo-1682327751432-2d0ae8e5b361?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMzF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-            alt="верхушка храма"
-          />
-          <h2 class="element__title">Крыша Храма</h2>
-          <button class="element__like-button" type="button"></button>
+          <button class="profile__add-button" type="button"></button>
+        </section>
 
-        </article>
-        <article class="element">
-          <img
-            class="element__image"
-            src="https://images.unsplash.com/photo-1682169391623-46de7799b501?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-            alt="горная порода"
-          />
-          <h2 class="element__title">Гора</h2>
-          <button class="element__like-button element__like-button_active" type="button"></button>
+        <section class="elements">
+          <article class="element">
+            <img
+              class="element__image"
+              src="https://images.unsplash.com/photo-1682421230186-4a0e2bb24028?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=900&q=60"
+              alt="дорога с перекрестком"
+            />
+            <h2 class="element__title">Центр города</h2>
+            <button
+              class="element__like-button element__like-button_active"
+              type="button"
+            ></button>
+          </article>
+          <article class="element">
+            <img
+              class="element__image"
+              src="https://images.unsplash.com/photo-1682282462523-996afa93708b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60"
+              alt="тории в киото"
+            />
+            <h2 class="element__title">Киото</h2>
+            <button
+              class="element__like-button element__like-button_active"
+              type="button"
+            ></button>
+          </article>
+          <article class="element">
+            <img
+              class="element__image"
+              src="https://images.unsplash.com/photo-1604537466158-719b1972feb8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwyOHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60"
+              alt="девушка в лодке"
+            />
+            <h2 class="element__title">Девушка в лодке</h2>
+            <button
+              class="element__like-button element__like-button_active"
+              type="button"
+            ></button>
+          </article>
+          <article class="element">
+            <img
+              class="element__image"
+              src="https://images.unsplash.com/photo-1681842232867-bd0f2f149765?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1OXx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60"
+              alt="цветок сакуры"
+            />
+            <h2 class="element__title">Цветение Сакуры</h2>
+            <button
+              class="element__like-button element__like-button_active"
+              type="button"
+            ></button>
+          </article>
+          <article class="element">
+            <img
+              class="element__image"
+              src="https://images.unsplash.com/photo-1682327751432-2d0ae8e5b361?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMzF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
+              alt="верхушка храма"
+            />
+            <h2 class="element__title">Крыша Храма</h2>
+            <button
+              class="element__like-button element__like-button_active"
+              type="button"
+            ></button>
+          </article>
+          <article class="element">
+            <img
+              class="element__image"
+              src="https://images.unsplash.com/photo-1682169391623-46de7799b501?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
+              alt="горная порода"
+            />
+            <h2 class="element__title">Гора</h2>
+            <button
+              class="element__like-button element__like-button_active"
+              type="button"
+            ></button>
+          </article>
+        </section>
+      </main>
 
-        </article>
-      </section>
-    </main>
+      <footer class="footer">
+        <p class="footer__copyright">&copy;2023 Korolkova Ekaterina</p>
+      </footer>
 
-    <footer class="footer">
-      <p class="footer__copyright">&copy;2023 Korolkova Ekaterina</p>
-    </footer>
-
-    <div class="popup">
-      <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
-        <form class="popup__form" name="profile">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <fieldset class="popup__fieldset">
-            
-              <input 
+      <div class="popup">
+        <div class="popup__container">
+          <button class="popup__close-button" type="button"></button>
+          <form class="popup__form" name="profile">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <fieldset class="popup__fieldset">
+              <input
                 type="text"
                 class="popup__input popup__input_type_name"
                 id="name"
                 name="name"
-                placeholder="Имя" required/>
+                placeholder="Имя"
+                required
+              />
               <input
                 type="text"
                 class="popup__input popup__input_type_about"
                 id="about"
                 name="about"
-                placeholder="О себе" required
+                placeholder="О себе"
+                required
               />
-            
-            <button class="popup__save-button" type="submit">Сохранить</button>
-          </fieldset>
-        </form>
+
+              <button class="popup__save-button" type="submit">
+                Сохранить
+              </button>
+            </fieldset>
+          </form>
+        </div>
       </div>
     </div>
-
-   
-  </div>
-  <script src="./script/index.js"></script>
-  </body> 
+    <script src="./script/index.js"></script>
+  </body>
 </html>
-
