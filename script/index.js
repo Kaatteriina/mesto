@@ -14,8 +14,7 @@ editButton.addEventListener("click", function () {
   popup.classList.add("popup_opened");
   nameInput.value = profileName.textContent;
   aboutInput.value = profileDescription.textContent;
-  nameInput.value = currentUserData.name;
-  aboutInput.value = currentUserData.about;
+  
 });
 
 closeButton.addEventListener("click", function () {
