@@ -1,3 +1,5 @@
-.element__like-button_active{
-background-image: url(../../../../images/blackheart.svg);
+.element__like-button._active{
+background-color: transparent;
+background-image: url(../../../../images/activelikebutton.svg);
+opacity: 1;
 }

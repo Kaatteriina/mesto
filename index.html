@@ -33,7 +33,9 @@
           <button class="profile__add-button" type="button"></button>
         </section>
 
-        <section class="elements">
+        <section class="elements"></section>
+
+        <!-- <section class="elements"> 
           <article class="element">
             <img
               class="element__image"
@@ -112,12 +114,21 @@
               type="button"
             ></button>
           </article>
-        </section>
+        <!-- </section> -->
       </main>
 
       <footer class="footer">
         <p class="footer__copyright">&copy;2023 Korolkova Ekaterina</p>
       </footer>
+
+      <template id="card-template">
+        <article class="element">
+          <img class="element__image" src="" alt="" />
+          <h2 class="element__title"></h2>
+          <button class="element__like-button" type="button"></button>
+          <button class="element__delete-button" type="button"></button>
+        </article>
+      </template>
 
       <div class="popup">
         <div class="popup__container">
@@ -143,13 +154,57 @@
                   required
                 />
               </label>
-
               <button class="popup__save-button" type="submit">
                 Сохранить
               </button>
             </fieldset>
           </form>
         </div>
+      </div>
+
+      <div class="popup popup__card">
+        <div class="popup__container">
+          <button
+            class="popup__close-button popup__close-button_card"
+            type="button"
+          ></button>
+          <form class="popup__form" id="forma" name="profile">
+            <h2 class="popup__title">Новое фото</h2>
+            <fieldset class="popup__fieldset">
+              <label class="popup__label-field">
+                <input
+                  type="text"
+                  class="popup__input popup__input_type_title"
+                  id="name"
+                  name="name"
+                  placeholder="Название"
+                  required
+                />
+                <input
+                  type="text"
+                  class="popup__input popup__input_type_link"
+                  id="about"
+                  name="about"
+                  placeholder="Cсылка на картинку"
+                  required
+                />
+              </label>
+              <button class="popup__save-button" type="submit">Создать</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup popup__picture-view">
+        <figure class="popup__figure">
+          <button
+            class="popup__close-button popup__close-button_pic"
+            name="popup__button-close"
+            type="button"
+          ></button>
+          <img class="popup__image" src="#" alt="фото" />
+          <figcaption class="popup__image-title"></figcaption>
+        </figure>
       </div>
     </div>
     <script src="./script/index.js"></script>
