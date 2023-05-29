@@ -8,7 +8,7 @@ const aboutInput = document.getElementById("about");
 const profileName = document.querySelector(".profile__name")
 const profileDescription = document.querySelector(".profile__description")
 const addButton = document.querySelector('.profile__add-button');
-const popupCard = document.querySelector('.popup__card');
+const popupCard = document.querySelector('.popup_card');
 const closeButtonCard = popupCard.querySelector('.popup__close-button_card');
 
 
@@ -95,7 +95,7 @@ function createCard(name, image) {
   titleElement.textContent = name;
 
   const newImage = cardElement.querySelector('.element__image');
-const popupPic = document.querySelector('.popup__picture-view');
+const popupPic = document.querySelector('.popup_picture-view');
 const popupImage = popupPic.querySelector('.popup__image');
 const popupTitle = popupPic.querySelector('.popup__image-title');
 
@@ -168,7 +168,7 @@ likeButtons.forEach((button) => {
 });
 
 const images = document.querySelectorAll('.element__image');
-const popupPic = document.querySelector('.popup__picture-view');
+const popupPic = document.querySelector('.popup_picture-view');
 const popupImage = popupPic.querySelector('.popup__image');
 const popupTitle = popupPic.querySelector('.popup__image-title');
 const closeButtonPic = document.querySelector('.popup__close-button_pic');
