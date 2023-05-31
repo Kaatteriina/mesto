@@ -1,7 +1,7 @@
 const editButton = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_edit");
-const popupCloseButton = document.querySelector(".popup__close-button");
-const popupForm = document.querySelector(".popup__form");
+const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
+const popupEditForm = popupEdit.querySelector(".popup__form");
 const nameInput = document.querySelector(".popup__input_type_name");
 const aboutInput = document.querySelector(".popup__input_type_about");
 
@@ -17,11 +17,11 @@ editButton.addEventListener("click", function () {
   aboutInput.value = profileDescription.textContent;
 });
 
-popupCloseButton.addEventListener("click", function () {
+popupEditCloseButton.addEventListener("click", function () {
   closePopup(popupEdit);
 });
 
-popupForm.addEventListener("submit", function (event) {
+popupEditForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -85,7 +85,7 @@ function createCard(name, image) {
   const imageElement = cardElement.querySelector(".element__image");
   const titleElement = cardElement.querySelector(".element__title");
   const deleteButton = cardElement.querySelector(".element__delete-button");
-  const likeButton = cardElement.querySelector(".element__like-button");
+  
 
   imageElement.src = image;
   imageElement.alt = name;
@@ -108,25 +108,34 @@ function createCard(name, image) {
     cardElement.remove();
   });
 
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("_active");
-  });
+ 
 
   closeButtonPic.addEventListener("click", function () {
     closePopup(popupPic);
   });
 
-  return cardElement;
-}
+  const likeButton = cardElement.querySelector(".element__like-button");
 
-// Добавляем обработчик события для каждой кнопки лайка
-const likeButtons = document.querySelectorAll(".element__like-button");
-
-likeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    button.classList.toggle("_active");
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("element__like-button_active");
+    console.log(likeButton.classList); 
   });
-});
+  
+  return cardElement;
+  }
+  
+  // Добавляем обработчик события для каждой кнопки лайка
+  const likeButtons = document.querySelectorAll(".element__like-button");
+  
+  likeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      button.classList.toggle("element__like-button_active");
+      
+    });
+  });
+  
+
+
 
 function addCard(cardData) {
   const newCard = createCard(cardData.name, cardData.link);

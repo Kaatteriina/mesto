@@ -1,5 +1,5 @@
-.element__like-button._active{
+.element__like-button_active{
 background-color: transparent;
-background-image: url(../../../../images/activelikebutton.svg);
+background-image: url("../../../../images/activelikebutton.svg");
 opacity: 1;
 }
