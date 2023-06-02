@@ -150,20 +150,56 @@ function renderInitialCards() {
 
 renderInitialCards();
 
-const titleInput = popupCard.querySelector(".popup__input_type_title");
-const linkInput = popupCard.querySelector(".popup__input_type_link");
-const saveButton = document.querySelector(".popup__save-button");
-const formCard = document.getElementById("forma");
 
-formCard.addEventListener("submit", function (event) {
-  event.preventDefault();
+const saveButton = popupEditForm.querySelector('.popup__save-button');
 
-  const name = titleInput.value;
-  const url = linkInput.value;
-  const newCard = createCard(name, url);
-  console.log("Новая карточка:", name, url);
-  elementsContainer.insertBefore(newCard, elementsContainer.firstChild);
-  titleInput.value = "";
-  linkInput.value = "";
-  closePopup(popupCard);
+const showInputError = (inputElement, errorMessage) => {
+  const errorElement = popupEditForm.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.add('popup__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__error_visible');
+};
+
+const hideInputError = (inputElement) => {
+  const errorElement = popupEditForm.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.remove('popup__input_type_error');
+  errorElement.textContent = '';
+  errorElement.classList.remove('popup__error_visible');
+};
+
+const checkInputValidity = (inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(inputElement);
+  }
+};
+
+const toggleButtonState = () => {
+  if (nameInput.validity.valid && aboutInput.validity.valid) {
+    saveButton.disabled = false;
+  } else {
+    saveButton.disabled = true;
+  }
+};
+
+const setEventListeners = () => {
+  nameInput.addEventListener('input', function () {
+    checkInputValidity(nameInput);
+    toggleButtonState();
+  });
+
+  aboutInput.addEventListener('input', function () {
+    checkInputValidity(aboutInput);
+    toggleButtonState();
+  });
+};
+
+popupEditForm.addEventListener('submit', function (evt) {
+  evt.preventDefault();
 });
+
+setEventListeners();
+
+
+

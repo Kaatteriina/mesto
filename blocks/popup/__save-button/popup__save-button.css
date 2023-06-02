@@ -16,6 +16,17 @@
     color: #ffffff;
     transition: opacity 0.5s ease;
   }
+
+  .popup__save-button:disabled {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #000000;
+    opacity: .2;
+    pointer-events: none;
+    user-select: none;
+    cursor: auto;
+  }
+  
   
   .popup__save-button:hover {
     opacity: 0.8;
