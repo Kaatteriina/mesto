@@ -1,3 +1,14 @@
+import {
+  showInputError,
+  hideInputError,
+  checkInputValidity,
+  toggleButtonState,
+  setEventListeners,
+  handleFormSubmit,
+} from './validation.js';
+
+
+
 const editButton = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_edit");
 const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
@@ -167,59 +178,7 @@ function renderInitialCards() {
 renderInitialCards();
 
 // создаем общие элементы формы
-const popupForms = document.querySelectorAll(".popup__form");
-const saveButtons = document.querySelectorAll(".popup__save-button");
 
-// Элементы для попапа создания карточки
-const titleInput = document.querySelector(".popup__input_type_title");
-const linkInput = document.querySelector(".popup__input_type_link");
-
-const showInputError = (inputElement, errorMessage) => {
-  const errorElement = inputElement.parentElement.querySelector(
-    `#${inputElement.id}-error`
-  );
-  inputElement.classList.add("popup__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("popup__error_visible");
-};
-
-const hideInputError = (inputElement) => {
-  const errorElement = inputElement.parentElement.querySelector(
-    `#${inputElement.id}-error`
-  );
-  inputElement.classList.remove("popup__input_type_error");
-  errorElement.textContent = "";
-  errorElement.classList.remove("popup__error_visible");
-};
-
-const checkInputValidity = (inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(inputElement);
-  }
-};
-
-const toggleButtonState = (form, saveButton) => {
-  const inputs = form.querySelectorAll(".popup__input");
-  const isValid = Array.from(inputs).every((input) => input.validity.valid);
-  saveButton.disabled = !isValid;
-};
-
-const setEventListeners = (form, saveButton) => {
-  const inputs = form.querySelectorAll(".popup__input");
-  inputs.forEach((input) => {
-    input.addEventListener("input", () => {
-      checkInputValidity(input);
-      toggleButtonState(form, saveButton);
-    });
-  });
-};
-
-const handleFormSubmit = (event) => {
-  event.preventDefault();
-  //  код обработки отправки формы
-};
 
 //Настройка слушателей для попапа редактирования
 

@@ -2,7 +2,3 @@
     visibility: visible;
 }
 
-@media screen and (max-width: 767px){
-.popup__error {
-    width: 238px;
-}}

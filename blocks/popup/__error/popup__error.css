@@ -10,3 +10,15 @@
     visibility: hidden;
     width: 358px;
 }
+
+
+@media screen and (max-width: 1023px){
+    .popup__error {
+        width: 286px;
+    }}
+
+@media screen and (max-width: 767px){
+.popup__error {
+    width: 238px;
+}}
+
