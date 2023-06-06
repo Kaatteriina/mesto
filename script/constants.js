@@ -1,0 +1,25 @@
+export const editButton = document.querySelector(".profile__edit-button");
+export const popupEdit = document.querySelector(".popup_edit");
+export const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
+export const popupEditForm = popupEdit.querySelector(".popup__form");
+export const nameInput = document.querySelector(".popup__input_type_name");
+export const aboutInput = document.querySelector(".popup__input_type_about");
+export const profileName = document.querySelector(".profile__name");
+export const profileDescription = document.querySelector(".profile__description");
+export const addButton = document.querySelector(".profile__add-button");
+export const popupCard = document.querySelector(".popup_card");
+export const closeButtonCard = popupCard.querySelector(".popup__close-button_card");
+export const elementsContainer = document.querySelector(".elements");
+export const cardTemplate = document.querySelector("#card-template");
+export const popupPic = document.querySelector(".popup_picture-view");
+export const popupImage = popupPic.querySelector(".popup__image");
+export const popupTitle = popupPic.querySelector(".popup__image-title");
+export const closeButtonPic = popupPic.querySelector(".popup__close-button");
+export const likeButtons = document.querySelectorAll(".element__like-button");
+export const titleInput = popupCard.querySelector(".popup__input_type_title");
+export const linkInput = popupCard.querySelector(".popup__input_type_link");
+export const saveButton = document.querySelector(".popup__save-button");
+
+export const popupCardForm = popupCard.querySelector(".popup__form");
+export const popupCardSaveButton = popupCardForm.querySelector(".popup__save-button");
+export const popups = document.querySelectorAll(".popup");

@@ -95,7 +95,7 @@
             class="popup__close-button popup__close-button_card"
             type="button"
           ></button>
-          <form class="popup__form" name="profile">
+          <form class="popup__form" id="forma" name="profile">
             <h2 class="popup__title">Новое фото</h2>
             <fieldset class="popup__fieldset">
               <label class="popup__label-field">
@@ -120,7 +120,9 @@
                 />
                 <span class="popup__error" id="link-error"></span>
               </label>
-              <button class="popup__save-button" type="submit">Создать</button>
+              <button class="popup__save-button" type="submit" disabled>
+                Создать
+              </button>
             </fieldset>
           </form>
         </div>
@@ -138,7 +140,7 @@
         </figure>
       </div>
     </div>
-    <script src="./script/validation.js"></script>
+
     <script type="module" src="./script/index.js"></script>
   </body>
 </html>
