@@ -1,19 +1,13 @@
+import {
+  showInputError,
+  hideInputError,
+  checkInputValidity,
+  toggleButtonState,
+  setEventListeners,
+  handleFormSubmit,
+} from './validation.js';
+
 import { initialCards } from './cards.js';
-
-import { enableValidation } from './validation.js';
-
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-// Вызов функции enableValidation с передачей конфигурации
-enableValidation(validationConfig);
-
 
 const editButton = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_edit");
@@ -166,15 +160,13 @@ const linkInput = popupCard.querySelector(".popup__input_type_link");
 
 const popupEditSaveButton = popupEditForm.querySelector(".popup__save-button");
 setEventListeners(popupEditForm, popupEditSaveButton);
-popupEditForm.addEventListener("submit");
+popupEditForm.addEventListener("submit", handleFormSubmit);
 
 // Настройка слушателей для попапа создания карточки
 const popupCardForm = popupCard.querySelector(".popup__form");
 const popupCardSaveButton = popupCardForm.querySelector(".popup__save-button");
 setEventListeners(popupCardForm, popupCardSaveButton);
-popupCardForm.addEventListener('submit', handleCardFormSubmit);
-
-
+popupCardForm.addEventListener("submit", handleCardFormSubmit);
 
 
 // Обработчик отправки формы попапа карточки
@@ -203,4 +195,3 @@ popups.forEach((popup) => {
     }
   });
 });
-
