@@ -166,13 +166,15 @@ const linkInput = popupCard.querySelector(".popup__input_type_link");
 
 const popupEditSaveButton = popupEditForm.querySelector(".popup__save-button");
 setEventListeners(popupEditForm, popupEditSaveButton);
-popupEditForm.addEventListener("submit", handleFormSubmit);
+popupEditForm.addEventListener("submit");
 
 // Настройка слушателей для попапа создания карточки
 const popupCardForm = popupCard.querySelector(".popup__form");
 const popupCardSaveButton = popupCardForm.querySelector(".popup__save-button");
 setEventListeners(popupCardForm, popupCardSaveButton);
-popupCardForm.addEventListener("submit", handleCardFormSubmit);
+popupCardForm.addEventListener('submit', handleCardFormSubmit);
+
+
 
 
 // Обработчик отправки формы попапа карточки
@@ -201,3 +203,4 @@ popups.forEach((popup) => {
     }
   });
 });
+

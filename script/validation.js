@@ -20,12 +20,20 @@ export const checkInputValidity = (inputElement, { inputErrorClass, errorClass }
   }
 };
 
-export const toggleButtonState = (form, saveButton, { inactiveButtonClass }) => {
+export const toggleButtonState = (form, saveButton, config) => {
+  const { inactiveButtonClass } = config;
+
   const inputs = form.querySelectorAll('.popup__input');
   const isValid = Array.from(inputs).every((input) => input.validity.valid);
+
   saveButton.disabled = !isValid;
-  saveButton.classList.toggle(inactiveButtonClass, !isValid);
+  if (isValid) {
+    saveButton.classList.remove(inactiveButtonClass);
+  } else {
+    saveButton.classList.add(inactiveButtonClass);
+  }
 };
+
 
 export const setEventListeners = (form, config) => {
   const { inputErrorClass, errorClass, inactiveButtonClass } = config;
@@ -49,10 +57,13 @@ export const setEventListeners = (form, config) => {
   toggleButtonState(form, saveButton, { inactiveButtonClass });
 };
 
+
+
 export const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     setEventListeners(formElement, config);
-    formElement.addEventListener('submit', handleFormSubmit);
+    formElement.addEventListener('submit', (event) => handleFormSubmit(event, formElement.querySelector(config.submitButtonSelector)));
   });
 };
+
