@@ -1,12 +1,18 @@
-import {
-  showInputError,
-  hideInputError,
-  checkInputValidity,
-  toggleButtonState,
-  setEventListeners,
-  handleFormSubmit,
-} from './validation.js';
+import { initialCards } from './cards.js';
 
+import { enableValidation } from './validation.js';
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+// Вызов функции enableValidation с передачей конфигурации
+enableValidation(validationConfig);
 
 
 const editButton = document.querySelector(".profile__edit-button");
@@ -57,13 +63,13 @@ closeButtonCard.addEventListener("click", function () {
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleEscKey);
-  addEscListener(); 
+  addEscListener();
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.addEventListener("keydown", handleEscKey);
-  addEscListener(); 
+  addEscListener();
 }
 
 function handleEscKey(event) {
@@ -83,35 +89,6 @@ function addEscListener() {
 function removeEscListener() {
   document.removeEventListener("keydown", handleEscKey);
 }
-
-/* темплейт 6ти картинок и отображение их на сайте */
-
-const initialCards = [
-  {
-    name: "Тории",
-    link: "https://images.unsplash.com/photo-1492571350019-22de08371fd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1953&q=80",
-  },
-  {
-    name: "Фудзи",
-    link: "https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2092&q=80",
-  },
-  {
-    name: "Сибуя",
-    link: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-  },
-  {
-    name: "Сакура",
-    link: "https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80",
-  },
-  {
-    name: "Переулок",
-    link: "https://images.unsplash.com/photo-1554797589-7241bb691973?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1036&q=80",
-  },
-  {
-    name: "Киото",
-    link: "https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-  },
-];
 
 const elementsContainer = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card-template");
@@ -181,27 +158,9 @@ function renderInitialCards() {
 
 renderInitialCards();
 
-const titleInput = popupCard.querySelector(".popup__input_type_title"); 
-const linkInput = popupCard.querySelector(".popup__input_type_link"); 
-const saveButton = document.querySelector(".popup__save-button"); 
-const formCard = document.getElementById("forma"); 
+const titleInput = popupCard.querySelector(".popup__input_type_title");
+const linkInput = popupCard.querySelector(".popup__input_type_link");
 
- formCard.addEventListener("submit", function (event) { 
-   event.preventDefault(); 
-
- 
-
-  const name = titleInput.value; 
-  const url = linkInput.value; 
-  const newCard = createCard(name, url); 
-
-  console.log("Новая карточка:", name, url); 
-  elementsContainer.insertBefore(newCard, elementsContainer.firstChild); 
-  titleInput.value = ""; 
-  linkInput.value = ""; 
-  closePopup(popupCard); 
-
-}); 
 
 //Настройка слушателей для попапа редактирования
 
@@ -213,7 +172,24 @@ popupEditForm.addEventListener("submit", handleFormSubmit);
 const popupCardForm = popupCard.querySelector(".popup__form");
 const popupCardSaveButton = popupCardForm.querySelector(".popup__save-button");
 setEventListeners(popupCardForm, popupCardSaveButton);
-popupCardForm.addEventListener("submit", handleFormSubmit);
+popupCardForm.addEventListener("submit", handleCardFormSubmit);
+
+
+// Обработчик отправки формы попапа карточки
+function handleCardFormSubmit(event) {
+  event.preventDefault();
+
+  const name = titleInput.value;
+  const url = linkInput.value;
+
+  addCard({ name, link: url });
+
+  titleInput.value = "";
+  linkInput.value = "";
+
+  closePopup(popupCard);
+}
+
 
 //закрытие попапов по таргету
 
