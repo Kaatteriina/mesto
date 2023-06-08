@@ -44,5 +44,26 @@ export const setEventListeners = (form, saveButton) => {
 
 export const handleFormSubmit = (event) => {
   event.preventDefault();
-  //  код обработки отправки формы
+  // код обработки отправки формы
 };
+
+
+// Функция enableValidation, принимающая конфиг с селекторами
+export const enableValidation = (config) => {
+  const forms = Array.from(document.querySelectorAll(config.formSelector));
+
+  forms.forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+    });
+
+    const inputs = Array.from(form.querySelectorAll(config.inputSelector));
+    const submitButton = form.querySelector(config.submitButtonSelector);
+
+    setEventListeners(inputs, submitButton, config);
+  });
+};
+
+
+
+
