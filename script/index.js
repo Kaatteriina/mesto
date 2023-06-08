@@ -26,12 +26,10 @@ editButton.addEventListener("click", function () {
   openPopup(popupEdit);
   nameInput.value = profileName.textContent;
   aboutInput.value = profileDescription.textContent;
-  addEscListener();
 });
 
 popupEditCloseButton.addEventListener("click", function () {
   closePopup(popupEdit);
-  removeEscListener();
 });
 
 popupEditForm.addEventListener("submit", function (event) {
@@ -41,29 +39,28 @@ popupEditForm.addEventListener("submit", function (event) {
   profileDescription.textContent = aboutInput.value;
 
   closePopup(popupEdit);
-  removeEscListener();
 });
 
 addButton.addEventListener("click", function () {
   openPopup(popupCard);
-  addEscListener();
 });
 
 closeButtonCard.addEventListener("click", function () {
   closePopup(popupCard);
-  removeEscListener();
 });
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleEscKey);
-  addEscListener();
+
+  if (popup === popupCard) {
+    resetPopupCardForm();
+  }
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  document.addEventListener("keydown", handleEscKey);
-  addEscListener();
+  document.removeEventListener("keydown", handleEscKey);
 }
 
 function handleEscKey(event) {
@@ -71,17 +68,8 @@ function handleEscKey(event) {
     const openedPopup = document.querySelector(".popup_opened");
     if (openedPopup) {
       closePopup(openedPopup);
-      removeEscListener();
     }
   }
-}
-
-function addEscListener() {
-  document.addEventListener("keydown", handleEscKey);
-}
-
-function removeEscListener() {
-  document.removeEventListener("keydown", handleEscKey);
 }
 
 const elementsContainer = document.querySelector(".elements");
@@ -155,9 +143,24 @@ renderInitialCards();
 const titleInput = popupCard.querySelector(".popup__input_type_title");
 const linkInput = popupCard.querySelector(".popup__input_type_link");
 
+// Функция сброса состояния формы попапа popupCard
+function resetPopupCardForm() {
+  const form = popupCard.querySelector(".popup__form");
+  const saveButton = form.querySelector(".popup__save-button");
+  const inputs = form.querySelectorAll(".popup__input");
 
-//Настройка слушателей для попапа редактирования
+  // Сброс состояния кнопки
+  saveButton.classList.add("popup__save-button_disabled");
+  saveButton.disabled = true;
 
+  // Сброс состояния полей ввода
+  inputs.forEach((input) => {
+    input.value = "";
+    hideInputError(input);
+  });
+}
+
+// Настройка слушателей для попапа редактирования
 const popupEditSaveButton = popupEditForm.querySelector(".popup__save-button");
 setEventListeners(popupEditForm, popupEditSaveButton);
 popupEditForm.addEventListener("submit", handleFormSubmit);
@@ -167,7 +170,6 @@ const popupCardForm = popupCard.querySelector(".popup__form");
 const popupCardSaveButton = popupCardForm.querySelector(".popup__save-button");
 setEventListeners(popupCardForm, popupCardSaveButton);
 popupCardForm.addEventListener("submit", handleCardFormSubmit);
-
 
 // Обработчик отправки формы попапа карточки
 function handleCardFormSubmit(event) {
@@ -184,9 +186,7 @@ function handleCardFormSubmit(event) {
   closePopup(popupCard);
 }
 
-
-//закрытие попапов по таргету
-
+// Закрытие попапов по таргету
 const popups = document.querySelectorAll(".popup");
 popups.forEach((popup) => {
   popup.addEventListener("click", (event) => {
