@@ -42,11 +42,6 @@ export const setEventListeners = (form, saveButton) => {
   });
 };
 
-export const handleFormSubmit = (event) => {
-  event.preventDefault();
-  // код обработки отправки формы
-};
-
 
 // Функция enableValidation, принимающая конфиг с селекторами
 export const enableValidation = (config) => {
@@ -57,12 +52,13 @@ export const enableValidation = (config) => {
       event.preventDefault();
     });
 
-    const inputs = Array.from(form.querySelectorAll(config.inputSelector));
     const submitButton = form.querySelector(config.submitButtonSelector);
 
-    setEventListeners(inputs, submitButton, config);
+    setEventListeners(form, submitButton);
   });
 };
+
+
 
 
 

@@ -1,4 +1,4 @@
-import { enableValidation } from './validation.js';
+import { enableValidation, setEventListeners  } from './validation.js';
 
 import { initialCards } from './cards.js';
 
@@ -8,7 +8,6 @@ const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
 const popupEditForm = popupEdit.querySelector(".popup__form");
 const nameInput = document.querySelector(".popup__input_type_name");
 const aboutInput = document.querySelector(".popup__input_type_about");
-
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const addButton = document.querySelector(".profile__add-button");
@@ -25,14 +24,13 @@ popupEditCloseButton.addEventListener("click", function () {
   closePopup(popupEdit);
 });
 
-popupEditForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
+popupEditForm.addEventListener("submit", function () {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = aboutInput.value;
 
   closePopup(popupEdit);
 });
+
 
 addButton.addEventListener("click", function () {
   openPopup(popupCard);
@@ -41,6 +39,14 @@ addButton.addEventListener("click", function () {
 closeButtonCard.addEventListener("click", function () {
   closePopup(popupCard);
 });
+
+function hideInputError(input) {
+  const errorElement = input.nextElementSibling;
+  errorElement.textContent = "";
+  errorElement.classList.remove("popup__error_visible");
+}
+
+
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -156,13 +162,13 @@ function resetPopupCardForm() {
 // Настройка слушателей для попапа редактирования
 const popupEditSaveButton = popupEditForm.querySelector(".popup__save-button");
 setEventListeners(popupEditForm, popupEditSaveButton);
-popupEditForm.addEventListener("submit", handleFormSubmit);
+
 
 // Настройка слушателей для попапа создания карточки
 const popupCardForm = popupCard.querySelector(".popup__form");
 const popupCardSaveButton = popupCardForm.querySelector(".popup__save-button");
 setEventListeners(popupCardForm, popupCardSaveButton);
-popupCardForm.addEventListener("submit", handleCardFormSubmit);
+
 
 // Обработчик отправки формы попапа карточки
 function handleCardFormSubmit(event) {
@@ -188,6 +194,8 @@ popups.forEach((popup) => {
     }
   });
 });
+
+popupCardForm.addEventListener("submit", handleCardFormSubmit);
 
 enableValidation({
   formSelector: '.popup__form',
