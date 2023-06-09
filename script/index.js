@@ -1,4 +1,4 @@
-import { enableValidation, setEventListeners  } from './validation.js';
+import { enableValidation } from './validation.js';
 
 import { initialCards } from './cards.js';
 
@@ -160,14 +160,14 @@ function resetPopupCardForm() {
 }
 
 // Настройка слушателей для попапа редактирования
-const popupEditSaveButton = popupEditForm.querySelector(".popup__save-button");
-setEventListeners(popupEditForm, popupEditSaveButton);
+
+
 
 
 // Настройка слушателей для попапа создания карточки
 const popupCardForm = popupCard.querySelector(".popup__form");
-const popupCardSaveButton = popupCardForm.querySelector(".popup__save-button");
-setEventListeners(popupCardForm, popupCardSaveButton);
+
+
 
 
 // Обработчик отправки формы попапа карточки

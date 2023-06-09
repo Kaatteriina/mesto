@@ -1,60 +1,59 @@
 // validate.js
 
-export const showInputError = (inputElement, errorMessage) => {
+export const showInputError = (inputElement, errorMessage, config) => {
   const errorElement = inputElement.parentElement.querySelector(
     `#${inputElement.id}-error`
   );
-  inputElement.classList.add("popup__input_type_error");
+  inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add("popup__error_visible");
+  errorElement.classList.add(config.errorClass);
 };
 
-export const hideInputError = (inputElement) => {
+export const hideInputError = (inputElement, config) => {
   const errorElement = inputElement.parentElement.querySelector(
     `#${inputElement.id}-error`
   );
-  inputElement.classList.remove("popup__input_type_error");
+  inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
-  errorElement.classList.remove("popup__error_visible");
+  errorElement.classList.remove(config.errorClass);
 };
 
-export const checkInputValidity = (inputElement) => {
+export const checkInputValidity = (inputElement, config) => {
   if (!inputElement.validity.valid) {
-    showInputError(inputElement, inputElement.validationMessage);
+    showInputError(inputElement, inputElement.validationMessage, config);
   } else {
-    hideInputError(inputElement);
+    hideInputError(inputElement, config);
   }
 };
 
-export const toggleButtonState = (form, saveButton) => {
-  const inputs = form.querySelectorAll(".popup__input");
+export const toggleButtonState = (form, saveButton, config) => {
+  const inputs = form.querySelectorAll(config.inputSelector);
   const isValid = Array.from(inputs).every((input) => input.validity.valid);
   saveButton.disabled = !isValid;
 };
 
-export const setEventListeners = (form, saveButton) => {
-  const inputs = form.querySelectorAll(".popup__input");
+export const setEventListeners = (form, saveButton, config) => {
+  const inputs = form.querySelectorAll(config.inputSelector);
   inputs.forEach((input) => {
     input.addEventListener("input", () => {
-      checkInputValidity(input);
-      toggleButtonState(form, saveButton);
+      checkInputValidity(input, config); // Добавленная строка
+      toggleButtonState(form, saveButton, config); // Добавленная строка
     });
   });
 };
 
 
-// Функция enableValidation, принимающая конфиг с селекторами
 export const enableValidation = (config) => {
   const forms = Array.from(document.querySelectorAll(config.formSelector));
 
   forms.forEach((form) => {
-    form.addEventListener('submit', (event) => {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
     });
 
     const submitButton = form.querySelector(config.submitButtonSelector);
 
-    setEventListeners(form, submitButton);
+    setEventListeners(form, submitButton, config);
   });
 };
 
