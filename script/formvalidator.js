@@ -44,21 +44,27 @@ class FormValidator {
     });
   }
 
+  removeValidationErrors() {
+    this._inputList.forEach((inputElement) => {
+      const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+      inputElement.classList.remove(this._config.inputErrorClass);
+      errorElement.textContent = "";
+      errorElement.classList.remove(this._config.errorClass);
+    });
+    this._toggleButtonState();
+  }
+
   enableValidation() {
     this._formElement.addEventListener("submit", (event) => {
       event.preventDefault();
     });
 
     this._setEventListeners();
+
+    this.removeValidationErrors();
   }
 }
 
 export { FormValidator };
-
-
-
-
-
-
 
 
