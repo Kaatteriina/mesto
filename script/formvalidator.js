@@ -1,11 +1,15 @@
-// validate.js
-
 class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
     this._submitButton = this._formElement.querySelector(this._config.submitButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+  }
+
+  reset() {
+    this._formElement.reset();
+    this.removeValidationErrors();
+    this._toggleButtonState(); 
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -32,7 +36,11 @@ class FormValidator {
 
   _toggleButtonState() {
     const isValid = this._inputList.every((input) => input.validity.valid);
-    this._submitButton.disabled = !isValid;
+    if (isValid) {
+      this.enableSubmitButton();
+    } else {
+      this.disableSubmitButton();
+    }
   }
 
   _setEventListeners() {
@@ -51,7 +59,17 @@ class FormValidator {
       errorElement.textContent = "";
       errorElement.classList.remove(this._config.errorClass);
     });
-    this._toggleButtonState();
+    this.disableSubmitButton();
+  }
+
+  disableSubmitButton() {
+    this._submitButton.disabled = true;
+    this._submitButton.classList.add(this._config.inactiveButtonClass);
+  }
+
+  enableSubmitButton() {
+    this._submitButton.disabled = false;
+    this._submitButton.classList.remove(this._config.inactiveButtonClass);
   }
 
   enableValidation() {
@@ -66,5 +84,6 @@ class FormValidator {
 }
 
 export { FormValidator };
+
 
 

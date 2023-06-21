@@ -1,5 +1,5 @@
 // Card.js
-    export default class Card {
+export default class Card {
     constructor(data, templateSelector, popupCard) {
       this._name = data.name;
       this._image = data.link;
@@ -64,6 +64,8 @@
       return this._element;
     }
   }
+  
+  
   
   
   
