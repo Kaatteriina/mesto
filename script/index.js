@@ -1,4 +1,4 @@
-import { FormValidator } from "./Formvalidator.js";
+import { FormValidator } from "./formvalidator.js";
 import { initialCards } from "./cards.js";
 import {
   openPopup,
@@ -6,7 +6,7 @@ import {
   handleEscKey,
   handleOverlayClick,
 } from "./utils.js";
-import Card from "./Card.js";
+import Card from "./card.js";
 
 const formValidatorConfig = {
   formSelector: ".popup__form",
