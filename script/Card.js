@@ -1,27 +1,71 @@
-export const initialCards = [
-    {
-      name: "Тории",
-      link: "https://images.unsplash.com/photo-1492571350019-22de08371fd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1953&q=80",
-    },
-    {
-      name: "Фудзи",
-      link: "https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2092&q=80",
-    },
-    {
-      name: "Сибуя",
-      link: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    },
-    {
-      name: "Сакура",
-      link: "https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80",
-    },
-    {
-      name: "Переулок",
-      link: "https://images.unsplash.com/photo-1554797589-7241bb691973?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1036&q=80",
-    },
-    {
-      name: "Киото",
-      link: "https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    },
-  ];
+import { openPopup, handlePictureClick  } from "./utils.js";
+
+export function handleImageClick(event) {
+    const target = event.target;
+    if (target.classList.contains("element__image")) {
+      openPopup(popupCard);
+    }
+  }
+
+export default class Card {
+  constructor(data, templateSelector, popupCard, popupImage, popupImageTitle) {
+    this._name = data.name;
+    this._image = data.link;
+    this._templateSelector = templateSelector;
+    this._popupCard = popupCard;
+    this._popupImage = popupImage;
+    this._popupImageTitle = popupImageTitle;
+    this._element = this._getTemplate();
+    this._imageElement = this._element.querySelector(".element__image");
+    this._titleElement = this._element.querySelector(".element__title");
+    this._likeButton = this._element.querySelector(".element__like-button");
+    this._deleteButton = this._element.querySelector(".element__delete-button");
+
+    this._setEventListeners();
+  }
+
+  _getTemplate() {
+    const cardTemplate = document
+      .querySelector(this._templateSelector)
+      .content.querySelector(".element")
+      .cloneNode(true);
+    return cardTemplate;
+  }
+
+  _setEventListeners() {
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeClick();
+    });
+  
+    this._deleteButton.addEventListener("click", () => {
+      this._handleDeleteClick();
+    });
+  
+    this._imageElement.addEventListener("click", (event) => {
+      this._handleImageClick();
+    });
+  }
+  
+  _handleImageClick() {
+    handlePictureClick(this._imageElement, this._titleElement);
+  }
+  
+
+  _handleLikeClick() {
+    this._likeButton.classList.toggle("element__like-button_active");
+  }
+
+  _handleDeleteClick() {
+    this._element.remove();
+  }
+
+  generateCard() {
+    this._imageElement.src = this._image;
+    this._imageElement.alt = this._name;
+    this._titleElement.textContent = this._name;
+
+    return this._element;
+  }
+}
+
   
