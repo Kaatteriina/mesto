@@ -1,3 +1,4 @@
+import './index.css';
 import { FormValidator } from "../script/Formvalidator.js";
 import { initialCards } from "../script/cards.js";
 import { openPopup, closePopup, handleOverlayClick } from "../script/utils.js";
