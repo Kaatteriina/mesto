@@ -1,4 +1,11 @@
-import { handlePictureClick, closePopup, handleOverlayClick } from "./utils.js";
+import { openPopup, handlePictureClick  } from "./utils.js";
+
+export function handleImageClick(event) {
+    const target = event.target;
+    if (target.classList.contains("element__image")) {
+      openPopup(popupCard);
+    }
+  }
 
 export default class Card {
   constructor(data, templateSelector, popupCard, popupImage, popupImageTitle) {
@@ -29,36 +36,20 @@ export default class Card {
     this._likeButton.addEventListener("click", () => {
       this._handleLikeClick();
     });
-
+  
     this._deleteButton.addEventListener("click", () => {
       this._handleDeleteClick();
     });
-
-    this._imageElement.addEventListener("click", () => {
+  
+    this._imageElement.addEventListener("click", (event) => {
       this._handleImageClick();
     });
-
-    const closeButtonPic = document.querySelector(".popup__close-button_pic");
-    closeButtonPic.addEventListener("click", () => {
-      const popupPictureView = document.querySelector(".popup_picture-view");
-      closePopup(popupPictureView);
-    });
-
-    const popupPictureView = document.querySelector(".popup_picture-view");
-    popupPictureView.addEventListener("click", handleOverlayClick);
   }
-
+  
   _handleImageClick() {
     handlePictureClick(this._imageElement, this._titleElement);
-    const closeButtonPic = document.querySelector(".popup__close-button_pic");
-    closeButtonPic.addEventListener("click", () => {
-      const popupPictureView = document.querySelector(".popup_picture-view");
-      closePopup(popupPictureView);
-    });
-
-    const popupPictureView = document.querySelector(".popup_picture-view");
-    popupPictureView.addEventListener("click", handleOverlayClick);
   }
+  
 
   _handleLikeClick() {
     this._likeButton.classList.toggle("element__like-button_active");
@@ -76,4 +67,3 @@ export default class Card {
     return this._element;
   }
 }
-

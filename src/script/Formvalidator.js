@@ -1,6 +1,4 @@
-import { enableSubmitButton, disableSubmitButton } from "./utils.js";
-
-export class FormValidator {
+class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
@@ -39,9 +37,9 @@ export class FormValidator {
   _toggleButtonState() {
     const isValid = this._inputList.every((input) => input.validity.valid);
     if (isValid) {
-      enableSubmitButton(this._submitButton);
+      this.enableSubmitButton();
     } else {
-      disableSubmitButton(this._submitButton);
+      this.disableSubmitButton();
     }
   }
 
@@ -61,7 +59,17 @@ export class FormValidator {
       errorElement.textContent = "";
       errorElement.classList.remove(this._config.errorClass);
     });
-    disableSubmitButton(this._submitButton);
+    this.disableSubmitButton();
+  }
+
+  disableSubmitButton() {
+    this._submitButton.disabled = true;
+    this._submitButton.classList.add(this._config.inactiveButtonClass);
+  }
+
+  enableSubmitButton() {
+    this._submitButton.disabled = false;
+    this._submitButton.classList.remove(this._config.inactiveButtonClass);
   }
 
   enableValidation() {
@@ -74,6 +82,8 @@ export class FormValidator {
     this.removeValidationErrors();
   }
 }
+
+export { FormValidator };
 
 
 
