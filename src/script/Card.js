@@ -1,20 +1,11 @@
-import { openPopup, handlePictureClick  } from "./utils.js";
-
-export function handleImageClick(event) {
-    const target = event.target;
-    if (target.classList.contains("element__image")) {
-      openPopup(popupCard);
-    }
-  }
+import { handlePictureClick } from "./utils.js";
 
 export default class Card {
-  constructor(data, templateSelector, popupCard, popupImage, popupImageTitle) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._image = data.link;
     this._templateSelector = templateSelector;
-    this._popupCard = popupCard;
-    this._popupImage = popupImage;
-    this._popupImageTitle = popupImageTitle;
+    this._handleCardClick = handleCardClick; // Функция для открытия попапа
     this._element = this._getTemplate();
     this._imageElement = this._element.querySelector(".element__image");
     this._titleElement = this._element.querySelector(".element__title");
@@ -41,16 +32,11 @@ export default class Card {
       this._handleDeleteClick();
     });
   
-    this._imageElement.addEventListener("click", (event) => {
-      this._handleImageClick();
+    this._imageElement.addEventListener("click", () => {
+      this._handleCardClick(this._image, this._name); // Вызываем функцию для открытия попапа
     });
   }
   
-  _handleImageClick() {
-    handlePictureClick(this._imageElement, this._titleElement);
-  }
-  
-
   _handleLikeClick() {
     this._likeButton.classList.toggle("element__like-button_active");
   }

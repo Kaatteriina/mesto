@@ -1,7 +1,12 @@
-import { FormValidator } from "./Formvalidator.js";
+
+import './../index.css';  
 import { initialCards } from "./cards.js";
 import { openPopup, closePopup, handleOverlayClick } from "./utils.js";
 import Card from "./card.js";
+import { FormValidator } from "./FormValidator.js";  
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js"; 
+import UserInfo from "./UserInfo.js"; 
 
 const formValidatorConfig = {
   formSelector: ".popup__form",
@@ -24,12 +29,9 @@ cardFormValidator.enableValidation();
 const elementsContainer = document.querySelector(".elements");
 const cardTemplateSelector = "#card-template";
 const popupCard = document.querySelector(".popup_card");
-const popupPictureView = document.querySelector(".popup_picture-view");
-const popupImage = popupPictureView.querySelector(".popup__image");
-const popupImageTitle = popupPictureView.querySelector(".popup__image-title");
 
 function addCard(cardData) {
-  const card = new Card(cardData, cardTemplateSelector, popupCard, popupImage, popupImageTitle);
+  const card = new Card(cardData, cardTemplateSelector, handleCardClick); //NEW
   const cardElement = card.generateCard();
   elementsContainer.prepend(cardElement);
   closePopup(popupCard);
@@ -43,6 +45,10 @@ function renderInitialCards() {
 
 renderInitialCards();
 
+function handleCardClick(imageSrc, imageTitle) {
+  popupPictureView.open(imageSrc, imageTitle);
+}  //NEW
+
 const editButton = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_edit");
 const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
@@ -55,7 +61,8 @@ const addButton = document.querySelector(".profile__add-button");
 const closeButtonCard = popupCard.querySelector(".popup__close-button_card");
 const titleInput = popupCard.querySelector(".popup__input_type_title");
 const linkInput = popupCard.querySelector(".popup__input_type_link");
-const closeButtonPic = popupPictureView.querySelector(".popup__close-button_pic");
+
+const popupPictureView = new PopupWithImage(".popup_picture-view");
 
 popupCard.addEventListener("click", handleOverlayClick);
 popupEdit.addEventListener("click", handleOverlayClick);
@@ -94,13 +101,35 @@ function handleCardFormSubmit(event) {
   const url = linkInput.value;
 
   addCard({ name, link: url });
+  closePopup(popupCard);
 }
 
 popupCard.querySelector(".popup__form").addEventListener("submit", handleCardFormSubmit);
 
-popupPictureView.addEventListener("click", handleOverlayClick);
-closeButtonPic.addEventListener("click", function () {
-  closePopup(popupPictureView);
+popupPictureView.setEventListeners(); // Добавление обработчиков для PopupWithImage
+
+function handleImageClick(event) {
+  const target = event.target;
+  if (target.classList.contains("element__image")) {
+    const cardElement = target.closest(".element");
+    const imageElement = cardElement.querySelector(".element__image");
+    const titleElement = cardElement.querySelector(".element__title");
+    popupPictureView.open(imageElement.src, titleElement.textContent);
+  }
+}
+
+elementsContainer.addEventListener("click", handleImageClick);
+
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  aboutSelector: ".profile__description"
 });
 
+// Используйте методы getUserInfo и setUserInfo для работы с данными пользователя
+const userData = userInfo.getUserInfo();
+console.log(userData);
 
+userInfo.setUserInfo({
+  name: "Новое имя",
+  about: "Новая информация о себе"
+});

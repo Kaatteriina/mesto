@@ -1,4 +1,5 @@
 // utils.js
+
 export const openPopup = (popup) => {
     popup.classList.add("popup_opened");
     window.addEventListener("keydown", handleEscKey);
@@ -26,12 +27,12 @@ export const openPopup = (popup) => {
   };
   
   export const handlePictureClick = (imageElement, titleElement) => {
-    const popupPictureView = document.querySelector(".popup_picture-view");
-    const popupImage = popupPictureView.querySelector(".popup__image");
-    const popupImageTitle = popupPictureView.querySelector(".popup__image-title");
+    const popupImage = document.querySelector(".popup_picture-view .popup__image");
+    const popupImageTitle = document.querySelector(".popup_picture-view .popup__image-title");
   
     popupImage.src = imageElement.src;
     popupImage.alt = titleElement.textContent;
     popupImageTitle.textContent = titleElement.textContent;
-    openPopup(popupPictureView);
+    openPopup(document.querySelector(".popup_picture-view"));
   };
+  
