@@ -8,12 +8,12 @@ class Popup {
 
   open() {
     this._popup.classList.add("popup_opened");
-    window.addEventListener("keydown", this._handleEscClose);
+    window.addEventListener("keydown", this._handleEscKey);
   }
 
   close() {
     this._popup.classList.remove("popup_opened");
-    window.removeEventListener("keydown", this._handleEscClose);
+    window.removeEventListener("keydown", this._handleEscKey);
   }
 
   _handleEscClose = (event) => {

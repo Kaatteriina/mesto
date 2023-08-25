@@ -1,6 +1,4 @@
-// PopupWithImage.js
 import Popup from "./Popup.js";
-import { openPopup, closePopup } from "./utils.js";
 
 class PopupWithImage extends Popup {
   constructor(popupSelector) {
@@ -13,8 +11,10 @@ class PopupWithImage extends Popup {
     this._popupImage.src = imageSrc;
     this._popupImage.alt = imageTitle;
     this._popupImageTitle.textContent = imageTitle;
-    openPopup(this._popup); // Используем openPopup из utils.js
+    super.open(); // Вызываем метод open() из родительского класса Popup
   }
 }
 
 export default PopupWithImage;
+
+
