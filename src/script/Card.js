@@ -1,11 +1,10 @@
-import { handlePictureClick } from "./utils.js";
+
 
 export default class Card {
   constructor(data, templateSelector, handleCardClick) {
-    this._name = data.name;
-    this._image = data.link;
+    this._data = data;
     this._templateSelector = templateSelector;
-    this._handleCardClick = handleCardClick; // Функция для открытия попапа
+    this._handleCardClick = handleCardClick;
     this._element = this._getTemplate();
     this._imageElement = this._element.querySelector(".element__image");
     this._titleElement = this._element.querySelector(".element__title");
@@ -27,16 +26,14 @@ export default class Card {
     this._likeButton.addEventListener("click", () => {
       this._handleLikeClick();
     });
-
     this._deleteButton.addEventListener("click", () => {
       this._handleDeleteClick();
     });
-
-    this._imageElement.addEventListener("click", () => {
-      this._handleCardClick(this._image, this._name); // Вызываем функцию для открытия попапа
+    this._cardImage.addEventListener("click", () => {
+      this._handleCardClick(this._data.link, this._data.name);
     });
   }
-
+  
   _handleLikeClick() {
     this._likeButton.classList.toggle("element__like-button_active");
   }
@@ -45,10 +42,11 @@ export default class Card {
     this._element.remove();
   }
 
-  getView() {
-    this._imageElement.src = this._image;
+  generateCard() {
+    this._element = this._getTemplate();
     this._imageElement.alt = this._name;
     this._titleElement.textContent = this._name;
+    this._setEventListeners();
 
     return this._element;
   }

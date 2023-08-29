@@ -11,10 +11,8 @@ class PopupWithImage extends Popup {
     this._popupImage.src = imageSrc;
     this._popupImage.alt = imageTitle;
     this._popupImageTitle.textContent = imageTitle;
-    super.open(); // Вызываем метод open() из родительского класса Popup
+    this.openPopup(this._popup); // Используем метод openPopup, который вызовет функцию из utils.js
   }
 }
 
 export default PopupWithImage;
-
-

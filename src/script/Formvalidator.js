@@ -1,15 +1,11 @@
+
+
 class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
     this._submitButton = this._formElement.querySelector(this._config.submitButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-  }
-
-  reset() {
-    this._formElement.reset();
-    this.removeValidationErrors();
-    this._toggleButtonState(); 
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -34,15 +30,6 @@ class FormValidator {
     }
   }
 
-  _toggleButtonState() {
-    const isValid = this._inputList.every((input) => input.validity.valid);
-    if (isValid) {
-      this.enableSubmitButton();
-    } else {
-      this.disableSubmitButton();
-    }
-  }
-
   _setEventListeners() {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
@@ -50,6 +37,11 @@ class FormValidator {
         this._toggleButtonState();
       });
     });
+  }
+
+  _toggleButtonState() {
+    const isValid = this._inputList.every((input) => input.validity.valid);
+    isValid ? this.enableSubmitButton() : this.disableSubmitButton();
   }
 
   removeValidationErrors() {
@@ -75,12 +67,12 @@ class FormValidator {
     });
 
     this._setEventListeners();
-
     this.removeValidationErrors();
   }
 }
 
 export { FormValidator };
+
 
     
     
