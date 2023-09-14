@@ -7,9 +7,9 @@ class FormValidator {
     }
   
     reset() {
-      this._formElement.reset();
       this.removeValidationErrors();
       this._toggleButtonState(); 
+      this._formElement.reset();
     }
   
     _showInputError(inputElement, errorMessage) {
