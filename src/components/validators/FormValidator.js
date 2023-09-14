@@ -6,11 +6,7 @@ class FormValidator {
       this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
     }
   
-    reset() {
-      this.removeValidationErrors();
-      this._toggleButtonState(); 
-      this._formElement.reset();
-    }
+  
   
     _showInputError(inputElement, errorMessage) {
       const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
