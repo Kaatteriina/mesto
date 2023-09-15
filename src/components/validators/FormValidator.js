@@ -21,6 +21,7 @@ class FormValidator {
       errorElement.textContent = "";
       errorElement.classList.remove(this._config.errorClass);
     }
+    
   
     _checkInputValidity(inputElement) {
       if (!inputElement.validity.valid) {
@@ -50,10 +51,7 @@ class FormValidator {
   
     removeValidationErrors() {
       this._inputList.forEach((inputElement) => {
-        const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-        inputElement.classList.remove(this._config.inputErrorClass);
-        errorElement.textContent = "";
-        errorElement.classList.remove(this._config.errorClass);
+        this._hideInputError(inputElement); // Вызываем _hideInputError вместо дублирования кода
       });
       this.disableSubmitButton();
     }

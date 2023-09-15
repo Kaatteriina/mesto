@@ -1,10 +1,9 @@
 import Popup from "../Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, handleSubmit, validator) {
+  constructor(popupSelector, handleSubmit) {
     super(popupSelector);
     this.handleSubmit = handleSubmit;
-    this.validator = validator;
     this._form = this.$popup.querySelector('.popup__form'); // Найти форму и сохранить в _form
   }
 
@@ -27,12 +26,10 @@ export default class PopupWithForm extends Popup {
   }
 
   close() {
-    if (typeof this.validator === 'object' && typeof this.validator.reset === 'function') {
-      this.validator.reset();
-    }
-    this._form.reset(); 
-    super.close();
+    this._form.reset(); // Очищаем поля формы
+    super.close(); // Закрываем попап
   }
+  
 
  
 }
