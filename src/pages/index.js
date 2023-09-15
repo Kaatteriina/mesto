@@ -23,7 +23,7 @@ const cardFormValidator = new FormValidator(formValidatorConfig, cardForm);
 
 // Создаем секцию для карточек и рендерим начальные карточки
 const cardSection = new Section({ items: initialCards, renderer: cardRenderer }, '.elements');
-cardSection.renderAllElements();
+
 
 // Создаем экземпляры попапов и объекта для управления информацией о пользователе
 const popupPic = new PopupWithImage('.popup_picture-view');
@@ -58,6 +58,8 @@ editButton.addEventListener('click', function () {
 addButton.addEventListener('click', function () {
   addCardPopup.open();
 });
+
+
 
 // Обработчик отправки формы добавления карточки
 function handleCardFormSubmit(event, values) {

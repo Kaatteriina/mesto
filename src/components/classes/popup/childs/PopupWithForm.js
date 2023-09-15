@@ -30,12 +30,10 @@ export default class PopupWithForm extends Popup {
     if (typeof this.validator === 'object' && typeof this.validator.reset === 'function') {
       this.validator.reset();
     }
-
+    this._form.reset(); 
     super.close();
   }
 
-  resetForm() {
-    this._form.reset();
-  }
+ 
 }
 

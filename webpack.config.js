@@ -25,8 +25,16 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader'],
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'images/', // Путь для сохранения файла
+            },
+          },
+        ],
       },
       {
         test: /\.svg$/,
@@ -47,3 +55,4 @@ module.exports = {
     }),
   ],
 };
+
