@@ -53,8 +53,8 @@ const cardSection = new Section({ items: initialCards, renderer: cardRenderer },
 const popupPic = new PopupWithImage('.popup_picture-view');
 const userInfoPopup = new PopupWithForm('.popup_edit', handleInfoFormSubmit);
 const addCardPopup = new PopupWithForm('.popup_card', handleCardFormSubmit);
-const deleteCardPopup = new PopupWithForm('.popup__delete', handleDeleteCardFormSubmit)
-const updatePicPopup = new PopupWithForm('.popup__update', handleUpdatePicFormSubmit)
+const deleteCardPopup = new PopupWithForm('.popup_delete', handleDeleteCardFormSubmit)
+const updatePicPopup = new PopupWithForm('.popup_update', handleUpdatePicFormSubmit)
 const userInfo = new UserInfo({
   profileAvatarSelector: '.profile__avatar',
   profileNameSelector: '.profile__name',

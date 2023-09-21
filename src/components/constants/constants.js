@@ -1,5 +1,5 @@
 export const popupCard = document.querySelector(".popup_card");
-export const updatePicForm = document.querySelector(".popup__update .popup__form")
+export const updatePicForm = document.querySelector(".popup_update .popup__form")
 
 export const cardTemplate = document.querySelector("#card-template");
 export const popupPic = document.querySelector(".popup_picture-view");
