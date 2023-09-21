@@ -14,14 +14,9 @@
 
       <main class="content">
         <section class="profile">
-          <div style="position: relative;">
-            <div  class="profile__overlay">
-            </div>
-            <img
-              class="profile__avatar"
-              src=""
-              alt="аватарка профиля"
-            />
+          <div style="position: relative">
+            <div class="profile__overlay"></div>
+            <img class="profile__avatar" src="#" alt="аватарка профиля" />
           </div>
 
           <div class="profile__info">
@@ -46,7 +41,15 @@
         <article class="element">
           <img class="element__image" src="#" alt="#" />
           <h2 class="element__title"></h2>
-          <div style="display: flex; flex-direction: column; align-items: center; padding-right: 21px; gap: 5px">
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              padding-right: 21px;
+              gap: 5px;
+            "
+          >
             <button class="element__like-button" type="button"></button>
             <span class="element__like-count">0</span>
           </div>
@@ -98,10 +101,7 @@
           <button class="popup__close-button" type="button"></button>
           <form class="popup__form" name="profile">
             <h2 class="popup__title">Вы уверены?</h2>
-              <button class="popup__save-button" type="submit">
-                Да
-              </button>
-            </fieldset>
+            <button class="popup__save-button" type="submit">Да</button>
           </form>
         </div>
       </div>
