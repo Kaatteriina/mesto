@@ -14,18 +14,22 @@
 
       <main class="content">
         <section class="profile">
-          <img
-            class="profile__avatar"
-            src="https://images.unsplash.com/photo-1682079470276-619657e2a48b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMzl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-            alt="аватарка профиля"
-          />
+          <div style="position: relative;">
+            <div  class="profile__overlay">
+            </div>
+            <img
+              class="profile__avatar"
+              src=""
+              alt="аватарка профиля"
+            />
+          </div>
 
           <div class="profile__info">
-            <h1 class="profile__name">Жак Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button class="profile__edit-button" type="button">
               Edit Button
             </button>
-            <p class="profile__description">Исследователь океана</p>
+            <p class="profile__description"></p>
           </div>
 
           <button class="profile__add-button" type="button"></button>
@@ -42,7 +46,10 @@
         <article class="element">
           <img class="element__image" src="#" alt="#" />
           <h2 class="element__title"></h2>
-          <button class="element__like-button" type="button"></button>
+          <div style="display: flex; flex-direction: column; align-items: center; padding-right: 21px; gap: 5px">
+            <button class="element__like-button" type="button"></button>
+            <span class="element__like-count">0</span>
+          </div>
           <button class="element__delete-button" type="button"></button>
         </article>
       </template>
@@ -86,7 +93,18 @@
           </form>
         </div>
       </div>
-
+      <div class="popup popup__delete">
+        <div class="popup__container">
+          <button class="popup__close-button" type="button"></button>
+          <form class="popup__form" name="profile">
+            <h2 class="popup__title">Вы уверены?</h2>
+              <button class="popup__save-button" type="submit">
+                Да
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
       <div class="popup popup_card">
         <div class="popup__container">
           <button
@@ -125,7 +143,33 @@
           </form>
         </div>
       </div>
-
+      <div class="popup popup__update">
+        <div class="popup__container">
+          <button
+            class="popup__close-button popup__close-button_card"
+            type="button"
+          ></button>
+          <form class="popup__form" id="forma" name="profile">
+            <h2 class="popup__title">Обновить аватар</h2>
+            <fieldset class="popup__fieldset">
+              <label class="popup__label-field">
+                <input
+                  type="url"
+                  class="popup__input popup__input_type_link"
+                  id="link"
+                  name="link"
+                  placeholder="Cсылка на картинку"
+                  required
+                />
+                <span class="popup__error" id="link-error"></span>
+              </label>
+              <button class="popup__save-button" type="submit" disabled>
+                Сохранить
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
       <div class="popup popup_picture-view">
         <figure class="popup__figure">
           <button

@@ -4,4 +4,30 @@
     height: 120px;
     object-fit: cover;
   }
-  
+
+
+.profile__overlay:hover {
+
+    opacity: 1;
+    transition: .3s;
+}
+
+
+.profile__overlay {
+  background-image: url('../../../images/pensil.svg');
+  opacity: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 48px;
+  transition: .3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000c2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
