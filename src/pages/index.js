@@ -41,15 +41,15 @@ const updatePicFormValidator = new FormValidator(
 
 let initialCards = [];
 
-api.getAllCards().then((cards) => {
-  initialCards.push(...cards);
-
-  initialCards.forEach((itemData) => {
-    const card = createCard(itemData);
-
-    addCardToSection(card, cardSection);
+api.getAllCards()
+  .then((cards) => {
+    initialCards = cards.reverse(); // Разворачиваем массив начальных карточек
+    initialCards.forEach((itemData) => {
+      const card = createCard(itemData);
+      addCardToSection(card, cardSection);
+    });
   });
-});
+
 
 const cardSection = new Section(
   { items: initialCards, renderer: cardRenderer },
@@ -78,6 +78,7 @@ const userInfo = new UserInfo({
   profileNameSelector: ".profile__name",
   profileAboutSelector: ".profile__description",
 });
+
 
 const profileOverlay = document.querySelector(".profile__overlay");
 
@@ -140,6 +141,15 @@ function handleCardFormSubmit(event, values) {
     addCardPopup.close();
   });
 }
+
+function renderLoading(buttonElement, isLoading) {
+  if (isLoading) {
+    buttonElement.textContent = "Сохранение...";
+  } else {
+    buttonElement.textContent = "Сохранить";
+  }
+}
+
 
 // Обработчик отправки формы редактирования профиля
 function handleInfoFormSubmit(event, values) {

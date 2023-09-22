@@ -4,6 +4,7 @@ export default class UserInfo {
     this._profileName = document.querySelector(profileNameSelector)
     this._profileAbout = document.querySelector(profileAboutSelector)
     this._profileAvatar = document.querySelector(profileAvatarSelector)
+    
   }
 
 

@@ -1,4 +1,4 @@
-import { api } from "../pages"; 
+import { api } from "..//pages"; 
 
 export default class Card {
   constructor(data, templateSelector, popupCard,
@@ -24,7 +24,7 @@ export default class Card {
     this._deleteButton = this._element.querySelector(".element__delete-button");
     this.handleCardClick = handleCardClick
     
-
+    console.log(data.owner._id, this._ownerId);
     if (data.owner._id !== this._ownerId) {
       this._deleteButton.remove();
     }
