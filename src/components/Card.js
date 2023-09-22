@@ -1,7 +1,7 @@
-import { api } from "../../../pages";
-
 export default class Card {
-  constructor(data, templateSelector, popupCard, popupImage, popupDelete, popupImageTitle, handleCardClick) {
+  constructor(data, templateSelector, popupCard,
+     popupImage, popupDelete, popupImageTitle, 
+     handleCardClick,ownerId,handleLikeClick, handleDeleteClick) {
     this._name = data.name;
     this._image = data.link;
     this._cardData = data
@@ -10,6 +10,9 @@ export default class Card {
     this._popupImage = popupImage;
     this._popupImageTitle = popupImageTitle;
     this._popupDelete = popupDelete;
+    this._ownerId = ownerId; 
+    this._handleLikeClick = handleLikeClick;
+    this._handleDeleteClick = handleDeleteClick;
     this._element = this._getTemplate();
     this._imageElement = this._element.querySelector(".element__image");
     this._titleElement = this._element.querySelector(".element__title");
@@ -20,8 +23,8 @@ export default class Card {
     this.handleCardClick = handleCardClick
     
 
-    if(data.owner._id !== 'e607350ecc174d7ba9ebc8e3') {
-      this._deleteButton.remove()
+    if (data.owner._id !== this._ownerId) {
+      this._deleteButton.remove();
     }
 
     const isUserLiked = data.likes.find(like => like._id === 'e607350ecc174d7ba9ebc8e3');
@@ -54,32 +57,25 @@ export default class Card {
     this._imageElement.addEventListener("click", () => {
       this.handleCardClick(this._image, this._name);
     });
-    
   }
-
   
-  // _handleImageClick() {
-  //   this._popupCard.open(this._imageElement.src, this._titleElement.textContent)
-  // }
-  
-
   _handleLikeClick() {
     const isLiked = this._likeButton.classList.toggle("element__like-button_active");
-
-    if(!isLiked) {
+    
+    if (!isLiked) {
       api.unlikeCard(this._cardData._id).then(card => {
-        this._likeCount.textContent = card.likes.length
-      })
+        this._likeCount.textContent = card.likes.length;
+      });
     } else {
       api.likeCard(this._cardData._id).then(card => {
-        this._likeCount.textContent = card.likes.length
-      })
+        this._likeCount.textContent = card.likes.length;
+      });
     }
   }
 
   _handleDeleteClick() {
-    this._popupDelete._getInputValues = () => ({element: this._element, card: this._cardData})
-    this._popupDelete.open()
+    this._popupDelete._getInputValues = () => ({ element: this._element, card: this._cardData });
+    this._popupDelete.open();
   }
 
   generateCard() {
@@ -91,4 +87,5 @@ export default class Card {
   }
 }
 
+  
   
