@@ -1,3 +1,5 @@
+import { api } from "../pages"; 
+
 export default class Card {
   constructor(data, templateSelector, popupCard,
      popupImage, popupDelete, popupImageTitle, 
@@ -47,11 +49,11 @@ export default class Card {
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      this._handleLikeClick();
+      this.handleLikeClick();
     });
   
     this._deleteButton.addEventListener("click", () => {
-      this._handleDeleteClick();
+      this.handleDeleteClick();
     });
   
     this._imageElement.addEventListener("click", () => {
@@ -59,7 +61,7 @@ export default class Card {
     });
   }
   
-  _handleLikeClick() {
+  handleLikeClick() {
     const isLiked = this._likeButton.classList.toggle("element__like-button_active");
     
     if (!isLiked) {
@@ -73,7 +75,7 @@ export default class Card {
     }
   }
 
-  _handleDeleteClick() {
+  handleDeleteClick() {
     this._popupDelete._getInputValues = () => ({ element: this._element, card: this._cardData });
     this._popupDelete.open();
   }

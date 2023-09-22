@@ -85,10 +85,15 @@ profileOverlay.addEventListener("click", () => {
   updatePicPopup.open();
 });
 
-api.getUserInfo().then((userInfoData) => {
-  const { name, about, avatar } = userInfoData;
-  userInfo.setUserInfo({ name, about, avatar });
-});
+Promise.all([api.getUserInfo(), api.getAllCards()])
+  .then(([userInfoData, cards]) => {
+    const { name, about, avatar } = userInfoData;
+    userInfo.setUserInfo({ name, about, avatar });
+    cardSection.renderAllElements(cards);
+  })
+  .catch(error => {
+    console.error('Ошибка загрузки данных:', error);
+  });
 
 // Включаем валидацию для форм
 profileFormValidator.enableValidation();
@@ -175,19 +180,6 @@ function createCard(itemData) {
     handleCardClick
   );
 }
-
-const card = new Card(
-  data, // данные карточки
-  templateSelector,
-  popupCard,
-  popupImage,
-  popupDelete,
-  popupImageTitle,
-  handleCardClick,
-  ownerId, // ID владельца карточки
-  handleLikeClick, // Обработчик для лайка
-  handleDeleteClick // Обработчик для удаления
-);
 
 // Функция добавления карточки в секцию
 function addCardToSection(card, section) {
