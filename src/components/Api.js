@@ -11,6 +11,8 @@ export default class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+
+
   getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers,

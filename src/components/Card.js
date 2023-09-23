@@ -1,9 +1,8 @@
-import { api } from "..//pages"; 
 
 export default class Card {
   constructor(data, templateSelector, popupCard,
      popupImage, popupDelete, popupImageTitle, 
-     handleCardClick,ownerId,handleLikeClick, handleDeleteClick) {
+     handleCardClick, userId, likeClickHandler, dislikesClickHandler) {
     this._name = data.name;
     this._image = data.link;
     this._cardData = data
@@ -12,9 +11,8 @@ export default class Card {
     this._popupImage = popupImage;
     this._popupImageTitle = popupImageTitle;
     this._popupDelete = popupDelete;
-    this._ownerId = ownerId; 
-    this._handleLikeClick = handleLikeClick;
-    this._handleDeleteClick = handleDeleteClick;
+    this.likeClickHandler = likeClickHandler
+    this.dislikesClickHandler = dislikesClickHandler
     this._element = this._getTemplate();
     this._imageElement = this._element.querySelector(".element__image");
     this._titleElement = this._element.querySelector(".element__title");
@@ -24,12 +22,12 @@ export default class Card {
     this._deleteButton = this._element.querySelector(".element__delete-button");
     this.handleCardClick = handleCardClick
     
-    console.log(data.owner._id, this._ownerId);
-    if (data.owner._id !== this._ownerId) {
+
+    if (data.owner._id !== userId) {
       this._deleteButton.remove();
     }
 
-    const isUserLiked = data.likes.find(like => like._id === 'e607350ecc174d7ba9ebc8e3');
+    const isUserLiked = data.likes.find(like => like._id === userId);
 
     if(isUserLiked) {
       this._likeButton.classList.add('element__like-button_active');
@@ -64,14 +62,20 @@ export default class Card {
   handleLikeClick() {
     const isLiked = this._likeButton.classList.toggle("element__like-button_active");
     
-    if (!isLiked) {
-      api.unlikeCard(this._cardData._id).then(card => {
-        this._likeCount.textContent = card.likes.length;
+
+
+    if (isLiked) {
+
+      this.likeClickHandler(likeCount => {
+        this._likeCount.textContent = likeCount
       });
+
+
     } else {
-      api.likeCard(this._cardData._id).then(card => {
-        this._likeCount.textContent = card.likes.length;
-      });
+      this.dislikesClickHandler(likeCount => {
+        this._likeCount.textContent = likeCount
+      })
+
     }
   }
 
