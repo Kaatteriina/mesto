@@ -1,7 +1,6 @@
 import "./index.css";
 import { FormValidator } from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-import { renderLoading } from "../utils/utils.js";
 
 import {
   profileForm,
@@ -130,7 +129,7 @@ function handleCardFormSubmit(event, values) {
   event.preventDefault();
 
   api.createCard(values).then((data) => {
-    addCard(data);
+    cardRenderer(cardSection.container)(data);
     addCardPopup.close();
   })
   .catch((err) => {
@@ -215,14 +214,19 @@ function createCard(itemData) {
     handleDislikesClick(itemData._id)
   );
 }
-// Функция-рендерер для добавления карточки в секцию
-function cardRenderer(section, itemData) {
-  const card = createCard(itemData);
-  const cardElement = card.generateCard();
-  section.addItem(cardElement);
-}
 
-// Функция добавления карточки в секцию
-function addCardToSection(card, section) {
-  cardRenderer(section, card);
+  
+
+// Функция-рендерер для добавления карточки в секцию
+function cardRenderer(container) {
+  return (itemData) => {
+    const card = createCard(itemData);
+    const cardElement = card.generateCard();
+    container.prepend(cardElement);
+  };
 }
+function addCard(cardData) { 
+    const newCard = createCard(cardData); 
+    const cardElement = newCard.generateCard(); 
+    cardSection.addItem(cardElement); 
+  } 
