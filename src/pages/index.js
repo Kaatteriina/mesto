@@ -1,6 +1,8 @@
 import "./index.css";
 import { FormValidator } from "../components/FormValidator.js";
 import Card from "../components/Card.js";
+import { renderLoading } from "../utils/utils.js";
+
 import {
   profileForm,
   cardForm,
@@ -10,12 +12,12 @@ import {
   editButton,
   addButton,
   updatePicForm,
-} from "../components/constants.js";
+} from "../utils/constants.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import { formValidatorConfig } from "../components/config.js";
+import { formValidatorConfig } from "../utils/config.js";
 import Api from "../components/Api";
 
 export const api = new Api({
@@ -26,13 +28,7 @@ export const api = new Api({
   },
 });
 
-let userId = ''
-
-
-
-
-
-
+let userId = "";
 
 // Создаем экземпляры валидаторов
 const profileFormValidator = new FormValidator(
@@ -45,12 +41,9 @@ const updatePicFormValidator = new FormValidator(
   updatePicForm
 );
 
-
-
-
 // Создаем секцию для карточек и рендерим начальные карточки
 
-let cardSection = null
+let cardSection = null;
 
 const userInfo = new UserInfo({
   profileAvatarSelector: ".profile__avatar",
@@ -58,27 +51,22 @@ const userInfo = new UserInfo({
   profileAboutSelector: ".profile__description",
 });
 
-
-
-  Promise.all([api.getUserInfo(), api.getAllCards()])
+Promise.all([api.getUserInfo(), api.getAllCards()])
   .then(([userInfoData, cards]) => {
     const { name, about, avatar } = userInfoData;
     userInfo.setUserInfo({ name, about, avatar });
-    
-    userId = userInfoData._id
 
-    
+    userId = userInfoData._id;
+
     cardSection = new Section(
       { items: cards.reverse(), renderer: cardRenderer },
       ".elements"
     );
-    cardSection.renderAllElements()
+    cardSection.renderAllElements();
   })
-  .catch(error => {
-    console.error('Ошибка загрузки данных:', error);
+  .catch((error) => {
+    console.error("Ошибка загрузки данных:", error);
   });
-
-
 
 // Создаем экземпляры попапов и объекта для управления информацией о пользователе
 const popupPic = new PopupWithImage(".popup_picture-view");
@@ -93,13 +81,11 @@ const updatePicPopup = new PopupWithForm(
   handleUpdatePicFormSubmit
 );
 
-
 const profileOverlay = document.querySelector(".profile__overlay");
 
 profileOverlay.addEventListener("click", () => {
   updatePicPopup.open();
 });
-
 
 // Включаем валидацию для форм
 profileFormValidator.enableValidation();
@@ -133,6 +119,9 @@ function handleUpdatePicFormSubmit(event, values) {
     userInfo._profileAvatar.src = data.avatar;
     renderLoading(event.target.querySelector(".popup__save-button"), false);
     updatePicPopup.close();
+  })
+  .catch((err) => {
+    console.error(err);
   });
 }
 
@@ -143,42 +132,41 @@ function handleCardFormSubmit(event, values) {
   api.createCard(values).then((data) => {
     addCard(data);
     addCardPopup.close();
+  })
+  .catch((err) => {
+    console.error(err);
   });
 }
-
-function renderLoading(buttonElement, isLoading) {
-  if (isLoading) {
-    buttonElement.textContent = "Сохранение...";
-  } else {
-    buttonElement.textContent = "Сохранить";
-  }
-}
-
-
 // Обработчик отправки формы редактирования профиля
 function handleInfoFormSubmit(event, values) {
   event.preventDefault();
   renderLoading(event.target.querySelector(".popup__save-button"), true);
 
-  api.editUserInfo(values).then(() => {
-    userInfo.setUserInfo({ ...values, avatar: userInfo._profileAvatar.src });
-    renderLoading(event.target.querySelector(".popup__save-button"), false);
+  api
+    .editUserInfo(values)
+    .then(() => {
+      userInfo.setUserInfo({ ...values, avatar: userInfo._profileAvatar.src });
+      renderLoading(event.target.querySelector(".popup__save-button"), false);
 
-    userInfoPopup.close();
-  }).catch(err => {
-    console.error(err);
-  });
+      userInfoPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 function handleDeleteCardFormSubmit(event, cardInfo) {
   event.preventDefault();
 
-  api.deleteCard(cardInfo.card._id).then(() => {
-    cardInfo.element.remove();
-    deleteCardPopup.close();
-  }).catch(err => {
-    console.error(err);
-  });
+  api
+    .deleteCard(cardInfo.card._id)
+    .then(() => {
+      cardInfo.element.remove();
+      deleteCardPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 // Обработчик клика на изображение карточки
@@ -188,31 +176,32 @@ function handleCardClick(src, caption) {
 
 function handleLikeClick(cardId) {
   return (callback) => {
-    let likeCount = 0
-    api.likeCard(cardId).then(cardData => {
+    let likeCount = 0;
+    api.likeCard(cardId).then((cardData) => {
       likeCount = cardData.likes.length;
-      callback(likeCount)
-    });  
-  }
-
-
+      callback(likeCount);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  };
 }
 
 function handleDislikesClick(cardId) {
   return (callback) => {
-    let likeCount = 0
-    api.unlikeCard(cardId).then(cardData => {
+    let likeCount = 0;
+    api.unlikeCard(cardId).then((cardData) => {
       likeCount = cardData.likes.length;
-      callback(likeCount)
-  
+      callback(likeCount);
+    })
+    .catch((err) => {
+      console.error(err);
     });
-  
-  }
+  };
 }
 
 // Функция создания карточки
 function createCard(itemData) {
-  
   return new Card(
     itemData,
     cardTemplateSelector,
@@ -223,30 +212,17 @@ function createCard(itemData) {
     handleCardClick,
     userId,
     handleLikeClick(itemData._id),
-    handleDislikesClick(itemData._id),
+    handleDislikesClick(itemData._id)
   );
 }
-
-
-// Функция добавления карточки в секцию
-function addCardToSection(card, section) {
+// Функция-рендерер для добавления карточки в секцию
+function cardRenderer(section, itemData) {
+  const card = createCard(itemData);
   const cardElement = card.generateCard();
   section.addItem(cardElement);
 }
 
-// Функция-рендерер для добавления карточки в секцию
-function cardRenderer(container) {
-
-  return (itemData) => {    
-    const card = createCard(itemData);
-    const cardElement = card.generateCard();
-    container.prepend(cardElement);
-  };
-}
-
 // Функция добавления карточки в секцию
-function addCard(cardData) {
-  const newCard = createCard(cardData);
-  const cardElement = newCard.generateCard();
-  cardSection.addItem(cardElement);
+function addCardToSection(card, section) {
+  cardRenderer(section, card);
 }
